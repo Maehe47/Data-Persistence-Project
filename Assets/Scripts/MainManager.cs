@@ -6,6 +6,13 @@ using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+
+    public static MainManager instance;
+    public string playerName;
+    public static int highScore;
+    //public InputField playerNameInputField;
+    
+    
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -73,4 +80,31 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
-}
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    public void StartGame()
+    {
+        
+        SceneManager.LoadScene(1);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void SetPlayerName()
+    {
+       // playerName = playerNameInputField.placeholder.name;
+    }
+
+
+
+    }
